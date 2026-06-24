@@ -7,8 +7,8 @@ import { enGB } from "date-fns/locale";
 export default function Header(props: { startDateChange: Function, endDateChange: Function }) {
 
     const today = new Date();
-    const [startDate, setStartDate] = useState<Date | null>(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
-    const [endDate, setEndDate] = useState<Date | null>(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    const [startDate, setStartDate] = useState<Date>(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    const [endDate, setEndDate] = useState<Date>(new Date(today.getFullYear(), today.getMonth(), today.getDate()));
     const startDateInput = useRef(null);
     const endDateInput = useRef(null);
     setDefaultLocale('enGB');
@@ -40,7 +40,7 @@ export default function Header(props: { startDateChange: Function, endDateChange
                             <DatePicker ref={startDateInput} className='date' id='date_start' selected={startDate} onChange={(date) => { setStartDate(date); props.startDateChange(date) }} locale={enGB} dateFormat="dd-MM-yyyy" />
                             <div className='buttons'>
                                 <div className='button'>
-                                    <Image src='cross.svg' onClick={(e) => setStartDate(null)} alt='remove date' className='remove' width={24} height={24} />
+                                    <Image src='cross.svg' onClick={(e) => { const d = new Date(today.getFullYear(), today.getMonth(), today.getDate()); setStartDate(d); props.startDateChange(d) }} alt='remove date' className='remove' width={24} height={24} />
                                 </div>
                                 <div className='button'>
                                     <Image src='date.svg' onClick={startDateTrigger} alt='set date' className='select' width={24} height={24} />
@@ -51,7 +51,7 @@ export default function Header(props: { startDateChange: Function, endDateChange
                             <DatePicker ref={endDateInput} className='date' id='date_end' selected={endDate} onChange={(date) => { setEndDate(date); props.endDateChange(date) }} dateFormat="dd-MM-yyyy" />
                             <div className='buttons'>
                                 <div className='button'>
-                                    <Image src='cross.svg' onClick={(e) => setEndDate(null)} alt='remove date' className='remove' width={24} height={24} />
+                                    <Image src='cross.svg' onClick={(e) => { const d = new Date(today.getFullYear(), today.getMonth(), today.getDate()); setEndDate(d); props.endDateChange(d) }} alt='remove date' className='remove' width={24} height={24} />
                                 </div>
                                 <div className='button'>
                                     <Image src='date.svg' onClick={endDateTrigger} alt='set date' className='select' width={24} height={24} />
