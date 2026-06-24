@@ -9,7 +9,7 @@ export default function Item(props: { image_name: string, date: string }) {
         <div className='item'>
             <Image
                 className="item-image"
-                src={"/items/" + props.image_name}
+                src={"/Items/" + props.image_name}
                 alt={props.image_name}
                 width={86}
                 height={86}
